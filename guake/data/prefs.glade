@@ -85,14 +85,14 @@
   </object>
   <object class="GtkWindow" id="config-window">
     <property name="can-focus">False</property>
-    <property name="title" translatable="yes">Guake Preferences</property>
-    <property name="role">Guake Preferences</property>
+    <property name="title" translatable="yes">HeroTerm Preferences</property>
+    <property name="role">HeroTerm Preferences</property>
     <property name="window-position">center</property>
     <property name="default-width">450</property>
     <property name="icon">pixmaps/guake.png</property>
     <property name="urgency-hint">True</property>
     <property name="gravity">center</property>
-    <property name="startup-id">Guake Preferences</property>
+    <property name="startup-id">HeroTerm Preferences</property>
     <child>
       <object class="GtkBox" id="vbox4">
         <property name="visible">True</property>
@@ -135,7 +135,7 @@
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
                         <property name="margin-top">6</property>
-                        <property name="label" translatable="yes">&lt;span size="18000"&gt;&lt;b&gt;Guake properties&lt;/b&gt;&lt;/span&gt;</property>
+                        <property name="label" translatable="yes">&lt;span size="18000"&gt;&lt;b&gt;HeroTerm properties&lt;/b&gt;&lt;/span&gt;</property>
                         <property name="use-markup">True</property>
                       </object>
                       <packing>
@@ -149,7 +149,7 @@
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">Customize behavior and appearance of Guake!</property>
+                        <property name="label" translatable="yes">Customize behavior and appearance of HeroTerm!</property>
                         <property name="use-markup">True</property>
                       </object>
                       <packing>
@@ -383,7 +383,7 @@
                                         </child>
                                         <child>
                                           <object class="GtkCheckButton" id="start_at_login">
-                                            <property name="label" translatable="yes">Start Guake at login</property>
+                                            <property name="label" translatable="yes">Start HeroTerm at login</property>
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="receives-default">False</property>
@@ -3264,7 +3264,7 @@ For example, use &lt;b&gt;subl %(file_path)s:%(line_number)s&lt;/b&gt; for Subli
                                             <property name="can-focus">False</property>
                                             <property name="margin-top">12</property>
                                             <property name="margin-bottom">12</property>
-                                            <property name="label" translatable="yes">&lt;small&gt;In this dialog you can attach your own command or script to various Guake events&lt;/small&gt;</property>
+                                            <property name="label" translatable="yes">&lt;small&gt;In this dialog you can attach your own command or script to various HeroTerm events&lt;/small&gt;</property>
                                             <property name="use-markup">True</property>
                                           </object>
                                           <packing>

@@ -218,10 +218,10 @@ class Keybindings:
                 label = Gtk.accelerator_get_label(keyval, mask)
                 filename = pixmapfile("guake-notification.png")
                 notifier.showMessage(
-                    _("Guake Terminal"),
+                    _("HeroTerm"),
                     _(
                         "A problem happened when binding <b>%s</b> key.\n"
-                        "Please use Guake Preferences dialog to choose another "
+                        "Please use HeroTerm Preferences dialog to choose another "
                         "key"
                     )
                     % label,

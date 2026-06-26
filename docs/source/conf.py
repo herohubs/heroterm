@@ -44,7 +44,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = "Guake"
+project = "HeroTerm"
 copyright = "2018, Gaetan Semet"
 
 # The version info for the project you're documenting, acts as replacement for

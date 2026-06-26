@@ -14,7 +14,7 @@
         <key name="debug-mode" type="b">
             <default>false</default>
             <summary>Enable debug mode</summary>
-            <description>When debug mode is enabled, logs are printed in the standard output where Guake as been launched</description>
+            <description>When debug mode is enabled, logs are printed in the standard output where HeroTerm as been launched</description>
         </key>
         <key name="mouse-display" type="b">
             <default>true</default>
@@ -69,12 +69,12 @@
         <key name="use-popup" type="b">
             <default>true</default>
             <summary>Sets the popup notifications visibility.</summary>
-            <description>When true, popup notifications will be shown when Guake starts.</description>
+            <description>When true, popup notifications will be shown when HeroTerm starts.</description>
         </key>
         <key name="prompt-on-quit" type="b">
             <default>true</default>
             <summary>Prompt when quitting.</summary>
-            <description>Ask for confirmation when quitting Guake.</description>
+            <description>Ask for confirmation when quitting HeroTerm.</description>
         </key>
         <key name="prompt-on-close-tab" type="i">
             <default>0</default>
@@ -104,7 +104,7 @@
         <key name="tab-ontop" type="b">
             <default>false</default>
             <summary>Tab on top.</summary>
-            <description>Makes tab bar on top of the Guake window. Per default, tabs appear below the terminal. Setting this to True will move the tab on top of the terminal. Requires a restart.</description>
+            <description>Makes tab bar on top of the HeroTerm window. Per default, tabs appear below the terminal. Setting this to True will move the tab on top of the terminal. Requires a restart.</description>
         </key>
         <key name="new-tab-after" type="b">
             <default>false</default>
@@ -119,7 +119,7 @@
         <key name="lazy-losefocus" type="b">
             <default>false</default>
             <summary>Delay hiding on losing focus.</summary>
-            <description>Momentarily delay hiding Guake when focus is lost and don't hide if focus is returned quickly, like when switching desktops or turning on certain IMEs.</description>
+            <description>Momentarily delay hiding HeroTerm when focus is lost and don't hide if focus is returned quickly, like when switching desktops or turning on certain IMEs.</description>
         </key>
         <key name="window-tabbar" type="b">
             <default>true</default>
@@ -194,12 +194,12 @@
         <key name="window-halignment" type="i">
             <default>0</default>
             <summary>Window horizontal alignment.</summary>
-            <description>Place Guake at: 0: center, 1: left, 2: right</description>
+            <description>Place HeroTerm at: 0: center, 1: left, 2: right</description>
         </key>
         <key name="window-valignment" type="i">
             <default>0</default>
             <summary>Window vertical alignment.</summary>
-            <description>Place Guake at: 0: top, 1: bottom</description>
+            <description>Place HeroTerm at: 0: top, 1: bottom</description>
         </key>
         <key name="background-image-file" type="s">
             <default>''</default>
@@ -239,7 +239,7 @@
         <key name="use-default-font" type="b">
             <default>true</default>
             <summary>Use default font</summary>
-            <description>If true, Guake will use the GNOME monospace default font.</description>
+            <description>If true, HeroTerm will use the GNOME monospace default font.</description>
         </key>
         <key name="use-vte-titles" type="b">
             <default>true</default>
@@ -249,7 +249,7 @@
         <key name="set-window-title" type="b">
             <default>false</default>
             <summary>Set window title to current tab name</summary>
-            <description>If true, Guake will update its window title from the current tab name. It is useful when you work with applications that use windows title, (keepass, automatic time tracker apps)</description>
+            <description>If true, HeroTerm will update its window title from the current tab name. It is useful when you work with applications that use windows title, (keepass, automatic time tracker apps)</description>
         </key>
         <key name="compat-backspace" type="s">
             <default>'ascii-delete'</default>
@@ -304,7 +304,7 @@
         <key name="gtk-theme-name" type="s">
             <default>''</default>
             <summary>GTK Theme name</summary>
-            <description>Name of the GTK theme to apply on Guake. If set to an empty string, let GTK use the default system theme</description>
+            <description>Name of the GTK theme to apply on HeroTerm. If set to an empty string, let GTK use the default system theme</description>
         </key>
         <key name="gtk-prefer-dark-theme" type="b">
             <default>false</default>
@@ -354,8 +354,8 @@
         </key>
          <key name="allow-bold" type="b">
             <default>true</default>
-            <summary>Allow displaying bold font in Guake terminal.</summary>
-            <description>When allow_bold is disabled, any text in Guake terminal intended to print as bold text will be instead rendered as normal text.</description>
+            <summary>Allow displaying bold font in HeroTerm terminal.</summary>
+            <description>When allow_bold is disabled, any text in HeroTerm terminal intended to print as bold text will be instead rendered as normal text.</description>
         </key>
         <key name="bold-is-bright" type="b">
             <default>false</default>
@@ -406,7 +406,7 @@
         <key name="quit" type="s">
             <default>'&lt;Control&gt;&lt;Shift&gt;q'</default>
             <summary>Quit</summary>
-            <description>Quit Guake.</description>
+            <description>Quit HeroTerm.</description>
         </key>
         <key name="new-tab" type="s">
             <default>'&lt;Control&gt;&lt;Shift&gt;t'</default>

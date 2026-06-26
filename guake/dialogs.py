@@ -53,7 +53,7 @@ class PromptQuitDialog(Gtk.MessageDialog):
             tab_str = ""
             notebooks_str = ""
         else:
-            primary_msg = _("Do you really want to quit Guake?")
+            primary_msg = _("Do you really want to quit HeroTerm?")
             if tabs == 1:
                 tab_str = _(" and one tab open")
             else:

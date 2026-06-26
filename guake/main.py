@@ -91,7 +91,7 @@ def main():
         dest="version",
         action="store_true",
         default=False,
-        help=_("Show Guake version number and exit"),
+        help=_("Show HeroTerm version number and exit"),
     )
 
     parser.add_argument(
@@ -109,7 +109,7 @@ def main():
         dest="fullscreen",
         action="store_true",
         default=False,
-        help=_("Put Guake in fullscreen mode"),
+        help=_("Put HeroTerm in fullscreen mode"),
     )
 
     parser.add_argument(
@@ -117,7 +117,7 @@ def main():
         dest="unfullscreen",
         action="store_true",
         default=False,
-        help=_("Put Guake out from fullscreen mode"),
+        help=_("Put HeroTerm out from fullscreen mode"),
     )
 
     parser.add_argument(
@@ -134,7 +134,7 @@ def main():
         dest="is_visible",
         action="store_true",
         default=False,
-        help=_("Return 1 if Guake is visible, 0 otherwise"),
+        help=_("Return 1 if HeroTerm is visible, 0 otherwise"),
     )
 
     parser.add_argument(
@@ -142,7 +142,7 @@ def main():
         dest="show",
         action="store_true",
         default=False,
-        help=_("Shows Guake main window"),
+        help=_("Shows HeroTerm main window"),
     )
 
     parser.add_argument(
@@ -150,7 +150,7 @@ def main():
         dest="hide",
         action="store_true",
         default=False,
-        help=_("Hides Guake main window"),
+        help=_("Hides HeroTerm main window"),
     )
 
     parser.add_argument(
@@ -159,7 +159,7 @@ def main():
         dest="show_preferences",
         action="store_true",
         default=False,
-        help=_("Shows Guake preference window"),
+        help=_("Shows HeroTerm preference window"),
     )
 
     parser.add_argument(
@@ -168,7 +168,7 @@ def main():
         dest="show_about",
         action="store_true",
         default=False,
-        help=_("Shows Guake's about info"),
+        help=_("Shows HeroTerm's about info"),
     )
 
     parser.add_argument(
@@ -320,7 +320,7 @@ def main():
         dest="palette_name",
         action="store",
         default="",
-        help=_("Change Guake palette scheme"),
+        help=_("Change HeroTerm palette scheme"),
     )
 
     parser.add_argument(
@@ -366,7 +366,7 @@ def main():
         dest="quit",
         action="store_true",
         default=False,
-        help=_("Says to Guake go away =("),
+        help=_("Says to HeroTerm go away =("),
     )
 
     parser.add_argument(
@@ -383,7 +383,7 @@ def main():
         dest="save_preferences",
         action="store",
         default=None,
-        help=_("Save Guake preferences to this filename"),
+        help=_("Save HeroTerm preferences to this filename"),
     )
 
     parser.add_argument(
@@ -391,7 +391,7 @@ def main():
         dest="restore_preferences",
         action="store",
         default=None,
-        help=_("Restore Guake preferences from this file"),
+        help=_("Restore HeroTerm preferences from this file"),
     )
 
     parser.add_argument(
@@ -429,7 +429,7 @@ def main():
     if missing_deps:
         print(
             "[ERROR] missing at least one system dependencies. "
-            "You need to install additional packages for Guake to run"
+            "You need to install additional packages for HeroTerm to run"
         )
         print(
             "[ERROR] On Debian/Ubuntu you need to install the following libraries:\n"
@@ -454,7 +454,7 @@ def main():
         from guake import vte_version
         from guake import vte_runtime_version
 
-        print(f"Guake Terminal: {guake_version()}")
+        print(f"HeroTerm: {guake_version()}")
         print(f"VTE: {vte_version()}")
         print(f"VTE runtime: {vte_runtime_version()}")
         print(f"Gtk: {gtk_version()}")

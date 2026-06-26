@@ -44,6 +44,6 @@ class AboutDialog(SimpleGladeApp):
 
         dialog.set_property("logo", pixbuf)
 
-        dialog.set_name(_("Guake Terminal"))
+        dialog.set_name(_("HeroTerm"))
         dialog.set_version(guake_version())
         dialog.connect("response", lambda x, y: dialog.destroy())

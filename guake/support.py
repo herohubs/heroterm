@@ -61,7 +61,7 @@ def populate_display(display):
 def get_version():
     display = Gdk.Display.get_default()
 
-    print(f"Guake Version:\t\t{guake_version()}")
+    print(f"HeroTerm Version:\t\t{guake_version()}")
     print()
     print(f"Vte Version:\t\t{vte_version()}")
     print()

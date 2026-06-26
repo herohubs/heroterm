@@ -163,7 +163,7 @@ class Guake(SimpleGladeApp):
         except (ValueError, ImportError):
             self.tray_icon = Gtk.StatusIcon()
             self.tray_icon.set_from_file(img)
-            self.tray_icon.set_tooltip_text(_("Guake Terminal"))
+            self.tray_icon.set_tooltip_text(_("HeroTerm"))
             self.tray_icon.connect("popup-menu", self.show_menu)
             self.tray_icon.connect("activate", self.show_hide)
         else:
@@ -171,7 +171,7 @@ class Guake(SimpleGladeApp):
             self.tray_icon = appindicator.Indicator.new(
                 "guake-indicator", "guake-tray", appindicator.IndicatorCategory.APPLICATION_STATUS
             )
-            self.tray_icon.set_icon_full("guake-tray", _("Guake Terminal"))
+            self.tray_icon.set_icon_full("guake-tray", _("HeroTerm"))
             self.tray_icon.set_status(appindicator.IndicatorStatus.ACTIVE)
             menu = self.get_widget("tray-menu")
             show = Gtk.MenuItem(_("Show"))
@@ -286,8 +286,8 @@ class Guake(SimpleGladeApp):
             label = Gtk.accelerator_get_label(keyval, mask)
             filename = pixmapfile("guake-notification.png")
             notifier.showMessage(
-                _("Guake Terminal"),
-                _("Guake is now running,\npress <b>{!s}</b> to use it.").format(xml_escape(label)),
+                _("HeroTerm"),
+                _("HeroTerm is now running,\npress <b>{!s}</b> to use it.").format(xml_escape(label)),
                 filename,
             )
 
@@ -1453,7 +1453,7 @@ class Guake(SimpleGladeApp):
                 )
                 img_filename = pixmapfile("guake-notification.png")
                 notifier.showMessage(
-                    _("Guake Terminal"),
+                    _("HeroTerm"),
                     _(
                         "Your {session_filename} file is broken, backup to {session_filename}.bak"
                     ).format(session_filename=filename),
@@ -1465,7 +1465,7 @@ class Guake(SimpleGladeApp):
         if "schema_version" not in config:
             img_filename = pixmapfile("guake-notification.png")
             notifier.showMessage(
-                _("Guake Terminal"),
+                _("HeroTerm"),
                 _(
                     "Tabs session restore abort.\n"
                     "Your session file ({session_filename}) missing schema_version as key"
@@ -1478,7 +1478,7 @@ class Guake(SimpleGladeApp):
         if config["schema_version"] > TABS_SESSION_SCHEMA_VERSION:
             img_filename = pixmapfile("guake-notification.png")
             notifier.showMessage(
-                _("Guake Terminal"),
+                _("HeroTerm"),
                 _(
                     "Tabs session restore abort.\n"
                     "Your session file schema version is higher than current version "
@@ -1535,7 +1535,7 @@ class Guake(SimpleGladeApp):
                 traceback.print_exc(file=f)
             img_filename = pixmapfile("guake-notification.png")
             notifier.showMessage(
-                _("Guake Terminal"),
+                _("HeroTerm"),
                 _(
                     "Your {session_filename} schema is broken, backup to {session_filename}.bak, "
                     "and error message has been saved to {session_filename}.log.err.".format(
@@ -1551,7 +1551,7 @@ class Guake(SimpleGladeApp):
         # Notify the user
         if self.settings.general.get_boolean("restore-tabs-notify") and not suppress_notify:
             filename = pixmapfile("guake-notification.png")
-            notifier.showMessage(_("Guake Terminal"), _("Your tabs has been restored!"), filename)
+            notifier.showMessage(_("HeroTerm"), _("Your tabs has been restored!"), filename)
 
         log.info("Guake tabs restored from %s", session_file)
 

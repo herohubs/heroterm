@@ -24,7 +24,7 @@ gi.require_version("Notify", "0.7")
 from gi.repository import GLib
 from gi.repository import Notify
 
-Notify.init("Guake")
+Notify.init("HeroTerm")
 
 __all__ = ["showMessage"]
 

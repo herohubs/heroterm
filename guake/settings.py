@@ -133,6 +133,6 @@ class Settings:
                         p.communicate(input=prefs)
         except FileNotFoundError:
             log.exception(
-                """First run with newer Guake version detected.
+                """First run with newer HeroTerm version detected.
 dconf not installed, skipping preferences transfer."""
             )

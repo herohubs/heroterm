@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Guake Preferences
-Comment=Configure your Guake sessions
+Name=HeroTerm Preferences
+Comment=Configure your HeroTerm sessions
 TryExec=guake
 Exec=guake -p
 Icon=guake

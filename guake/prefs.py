@@ -86,8 +86,8 @@ HOTKEYS = [
         "label": _("General"),
         "key": "general",
         "keys": [
-            {"key": "show-hide", "label": _("Toggle Guake visibility")},
-            {"key": "show-focus", "label": _("Show and focus Guake window")},
+            {"key": "show-hide", "label": _("Toggle HeroTerm visibility")},
+            {"key": "show-focus", "label": _("Show and focus HeroTerm window")},
             {"key": "toggle-fullscreen", "label": _("Toggle Fullscreen")},
             {
                 "key": "toggle-hide-on-lose-focus",
