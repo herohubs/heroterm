@@ -538,3 +538,41 @@ def get_process_name(pid):
 
     match = re.match(r"\d+ \(([^)]+)\)", status)
     return match.group(1) if match else None
+
+
+def get_git_branch(directory):
+    """Return the git branch checked out in the repository containing
+    `directory`, the short commit hash on a detached HEAD, or None outside a
+    repository. Reads the HEAD file directly instead of spawning `git`."""
+    path = os.path.abspath(directory)
+    while True:
+        dot_git = os.path.join(path, ".git")
+        if os.path.isdir(dot_git):
+            git_dir = dot_git
+            break
+        if os.path.isfile(dot_git):
+            # Worktrees and submodules: ".git" is a file pointing to the git dir
+            try:
+                with open(dot_git, "r", encoding="utf-8") as fp:
+                    content = fp.read().strip()
+            except IOError:
+                return None
+            if not content.startswith("gitdir:"):
+                return None
+            git_dir = os.path.join(path, content[len("gitdir:") :].strip())
+            break
+        parent = os.path.dirname(path)
+        if parent == path:
+            return None
+        path = parent
+
+    try:
+        with open(os.path.join(git_dir, "HEAD"), "r", encoding="utf-8") as fp:
+            head = fp.read().strip()
+    except IOError:
+        return None
+
+    if head.startswith("ref:"):
+        ref = head[len("ref:") :].strip()
+        return ref[len("refs/heads/") :] if ref.startswith("refs/heads/") else ref
+    return head[:7] or None

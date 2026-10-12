@@ -1,0 +1,7 @@
+release_summary: >
+    The tab bar now shows the git branch of the current terminal's working directory.
+
+features:
+  - |
+    When the active terminal is inside a git repository, the branch name (or the short
+    commit hash on a detached HEAD) is displayed in the tab bar, next to the action buttons.

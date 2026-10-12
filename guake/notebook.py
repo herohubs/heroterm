@@ -31,6 +31,7 @@ from guake.menus import mk_notebook_context_menu
 from guake.prefs import PrefsDialog
 from guake.utils import HidePrevention
 from guake.utils import gdk_is_x11_display
+from guake.utils import get_git_branch
 from guake.utils import get_process_name
 from guake.utils import save_tabs_when_changed
 
@@ -40,9 +41,11 @@ import time
 
 gi.require_version("Gtk", "3.0")
 gi.require_version("Wnck", "3.0")
+from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import Gdk
 from gi.repository import Gtk
+from gi.repository import Pango
 from gi.repository import Wnck
 from guake.terminal import GuakeTerminal
 
@@ -50,6 +53,18 @@ import logging
 import posix
 
 log = logging.getLogger(__name__)
+
+# HeroTerm brand color, the same used by the logo
+BRAND_COLOR = "#0080ff"
+
+# Draw the selected tab indicator with the brand color instead of the theme accent,
+# always under the tab label when the tab bar is horizontal
+SELECTED_TAB_CSS = f"""
+notebook > header.top > tabs > tab:checked {{ box-shadow: inset 0 -3px {BRAND_COLOR}; }}
+notebook > header.bottom > tabs > tab:checked {{ box-shadow: inset 0 -3px {BRAND_COLOR}; }}
+notebook > header.left > tabs > tab:checked {{ box-shadow: inset -3px 0 {BRAND_COLOR}; }}
+notebook > header.right > tabs > tab:checked {{ box-shadow: inset 3px 0 {BRAND_COLOR}; }}
+"""
 
 
 class TerminalNotebook(Gtk.Notebook):
@@ -68,6 +83,12 @@ class TerminalNotebook(Gtk.Notebook):
         self.set_property("can-focus", True)
         self.set_property("is-focus", True)
         self.set_property("expand", True)
+
+        selected_tab_css = Gtk.CssProvider()
+        selected_tab_css.load_from_data(SELECTED_TAB_CSS.encode())
+        self.get_style_context().add_provider(
+            selected_tab_css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
 
         if GObject.signal_lookup("terminal-spawned", TerminalNotebook) == 0:
             GObject.signal_new(
@@ -115,11 +136,39 @@ class TerminalNotebook(Gtk.Notebook):
         self.popover_window = None
         self.tab_selection_button.connect("clicked", self.on_tab_selection)
 
+        # Git branch of the current terminal's working directory. The branch symbol
+        # comes from a fallback font with different metrics, so it gets its own label
+        # to keep both vertically centered.
+        git_branch_css = Gtk.CssProvider()
+        git_branch_css.load_from_data(f"label {{ color: {BRAND_COLOR}; }}".encode())
+        git_branch_icon = Gtk.Label(label="\u2387", visible=True, valign=Gtk.Align.CENTER)
+        self.git_branch_label = Gtk.Label(visible=True, valign=Gtk.Align.CENTER)
+        self.git_branch_label.set_ellipsize(Pango.EllipsizeMode.MIDDLE)
+        self.git_branch_label.set_max_width_chars(40)
+        for label in (git_branch_icon, self.git_branch_label):
+            label.get_style_context().add_provider(
+                git_branch_css, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            )
+        self.git_branch_box = Gtk.Box(
+            visible=False,
+            spacing=4,
+            valign=Gtk.Align.CENTER,
+            margin_start=6,
+            margin_end=12,
+        )
+        self.git_branch_box.pack_start(git_branch_icon, 0, 0, 0)
+        self.git_branch_box.pack_start(self.git_branch_label, 0, 0, 0)
+
         self.action_box = Gtk.Box(visible=True)
+        self.action_box.pack_start(self.git_branch_box, 0, 0, 0)
         self.action_box.pack_start(self.pin_button, 0, 0, 0)
         self.action_box.pack_start(self.new_page_button, 0, 0, 0)
         self.action_box.pack_start(self.tab_selection_button, 0, 0, 0)
         self.set_action_widget(self.action_box, Gtk.PackType.END)
+
+        # The shell's cwd can change at any time (`cd`, `git checkout`), so poll it
+        self._git_branch_timer = GLib.timeout_add_seconds(1, self.update_git_branch)
+        self.connect("destroy", self.on_destroy_git_branch_timer)
 
     def attach_guake(self, guake):
         self.guake = guake
@@ -471,6 +520,31 @@ class TerminalNotebook(Gtk.Notebook):
         label = self.get_tab_label(page)
         if hasattr(label, "set_activity"):
             label.set_activity(False)
+        # The current page changes after this handler: refresh once it is settled
+        GLib.idle_add(self.update_git_branch_once)
+
+    def update_git_branch_once(self):
+        self.update_git_branch()
+        return False
+
+    def update_git_branch(self):
+        """Show the git branch of the current terminal's directory, if any."""
+        if not self.get_mapped():
+            return True
+        terminal = self.get_current_terminal()
+        branch = None
+        if terminal is not None:
+            branch = get_git_branch(terminal.get_current_directory())
+        if branch:
+            self.git_branch_label.set_text(branch)
+            self.git_branch_box.set_tooltip_text(branch)
+        self.git_branch_box.set_visible(bool(branch))
+        return True
+
+    def on_destroy_git_branch_timer(self, *args):
+        if self._git_branch_timer:
+            GLib.source_remove(self._git_branch_timer)
+            self._git_branch_timer = None
 
     def clear_all_tab_activity(self):
         """Remove activity highlights from every tab (e.g. when the feature is

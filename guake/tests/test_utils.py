@@ -3,6 +3,7 @@
 import os
 
 from guake.utils import FileManager
+from guake.utils import get_git_branch
 from guake.utils import get_process_name
 
 
@@ -43,3 +44,31 @@ def test_file_manager_clear(fs):
 
 def test_process_name():
     assert get_process_name(os.getpid())
+
+
+def test_get_git_branch_on_branch(tmp_path):
+    (tmp_path / ".git").mkdir()
+    (tmp_path / ".git" / "HEAD").write_text("ref: refs/heads/feature/foo\n")
+    sub = tmp_path / "a" / "b"
+    sub.mkdir(parents=True)
+    assert get_git_branch(str(sub)) == "feature/foo"
+
+
+def test_get_git_branch_detached(tmp_path):
+    (tmp_path / ".git").mkdir()
+    (tmp_path / ".git" / "HEAD").write_text("0123456789abcdef0123456789abcdef01234567\n")
+    assert get_git_branch(str(tmp_path)) == "0123456"
+
+
+def test_get_git_branch_worktree(tmp_path):
+    git_dir = tmp_path / "main" / ".git" / "worktrees" / "wt"
+    git_dir.mkdir(parents=True)
+    (git_dir / "HEAD").write_text("ref: refs/heads/wt-branch\n")
+    worktree = tmp_path / "wt"
+    worktree.mkdir()
+    (worktree / ".git").write_text(f"gitdir: {git_dir}\n")
+    assert get_git_branch(str(worktree)) == "wt-branch"
+
+
+def test_get_git_branch_outside_repo(tmp_path):
+    assert get_git_branch(str(tmp_path)) is None
